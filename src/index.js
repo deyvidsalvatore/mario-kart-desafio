@@ -40,9 +40,29 @@ async function playRaceEngine(character1, character2) {
     for (let round = 1; round <= 5; round++) {
         console.log(`🏁 Rodada ${round}`);
         
-        // TODO: Sortear bloco
         let block = await getRandomBlock();
         console.log(`Block: ${block}`);
+
+        let diceResult1 = await rollDice();
+        let diceResult2 = await rollDice();
+
+        let totalTestSkill1 = 0;
+        let totalTestSkill2 = 0;
+
+        if (block === "RETA") {
+            totalTestSkill1 = diceResult1 + character1.VELOCIDADE;
+            totalTestSkill2 = diceResult2 + character2.VELOCIDADE;
+        }
+
+        if (block === "CURVA") {
+            totalTestSkill1 = diceResult1 + character1.MANOBRALIDADE;
+            totalTestSkill2 = diceResult2 + character2.MANOBRALIDADE;
+        }
+
+        if (block === "CONFRONTO") {
+            let powerResult1 = diceResult1 + character1.PODER;
+            let powerResult2 = diceResult2 + character2.PODER;
+        }
     } 
 }
 
